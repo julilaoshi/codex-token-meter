@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+runtime/
+dist/
+.DS_Store
+state.json
+state.tmp
+server.log
