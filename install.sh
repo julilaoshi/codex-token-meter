@@ -19,4 +19,4 @@ with zipfile.ZipFile(archive) as z:
   if p.is_absolute() or '..' in p.parts or (item.external_attr>>16)&0o170000==0o120000:raise SystemExit('Unsafe archive path')
  z.extractall(root/'source')
 PY
-python3 "$task_tmp/source/meter.py" install
+python3 "$task_tmp/source/meter.py" install "$@"
