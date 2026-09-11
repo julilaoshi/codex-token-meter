@@ -4,7 +4,7 @@
 
 [一键安装](#一键安装) · [English](README.md) · [给项目点 Star](https://github.com/julilaoshi/codex-token-meter)
 
-公开版 v1.0.2 · macOS 本地工具 · Python 3.9+ · 无第三方 Python 依赖 · 运行不调用 AI
+公开版 v1.0.3 · macOS 本地工具 · Python 3.9+ · 无第三方 Python 依赖 · 运行不调用 AI
 
 ![Token 计量表演示，名称和数值均为虚构](docs/demo.png)
 
@@ -12,7 +12,7 @@
 
 ## 一个小面板，看清正在发生的消耗
 
-- 上方：正在工作的任务，动态转圈、任务累计、上一轮对话用量。
+- 上方：正在工作的任务，动态转圈；四项并列显示累计用量、本周期用量、本周期 token 占比、上一轮对话用量。
 - 下方：其他已结束任务的本周期用量前五名。
 - 每个任务：本周期 token 占比与小饼图。
 - 每三秒自动更新，直角长条、大数字、小标签。
@@ -24,7 +24,7 @@
 需要 macOS、Python 3.9+ 和本地 Codex 会话记录。无需 sudo、订阅账号密码或 API key。运行前可先查看 [安装脚本](install.sh)。
 
 ```sh
-python3 -c 'import urllib.request, subprocess; subprocess.run(["sh"], input=urllib.request.urlopen("https://raw.githubusercontent.com/julilaoshi/codex-token-meter/v1.0.2/install.sh", timeout=30).read(), check=True)'
+python3 -c 'import urllib.request, subprocess; subprocess.run(["sh"], input=urllib.request.urlopen("https://raw.githubusercontent.com/julilaoshi/codex-token-meter/v1.0.3/install.sh", timeout=30).read(), check=True)'
 ```
 
 安装程序下载固定版本、核验 SHA-256、安装到用户自己的工具目录并启动服务。点击它输出的本机地址即可查看，也可以让 Codex 在右侧浏览器打开。右侧网页属于当前任务的浏览器标签页，并非 Codex 全局内嵌组件。
@@ -56,7 +56,7 @@ python3 ~/.local/share/codex-token-meter/meter.py uninstall
 
 这不是订阅额度百分比，不是费用，也不是上下文占用。不能通过选择 Pro 20× 换算出固定 token 上限。
 
-周期来自本地最新的 Codex 七天额度记录：重置时间往前七天到重置时间，日期按北京时间展示。周期缺失或过期时暂不显示占比和排行，不编造新周期。累计值转增量统计，相同时间和累计量的重复事件只归属一次；上一轮对话是最近一个结束或取消的用户轮次，不是最后一次模型请求。
+周期来自本地最新的 Codex 七天额度记录：重置时间往前七天到重置时间，日期按北京时间展示。周期缺失或过期时暂不显示占比和排行，不编造新周期。累计值转增量统计，原始计数重置时继续保留已累计的用量，相同时间和累计量的重复事件只归属一次；上一轮对话是最近一个结束或取消的用户轮次，不是最后一次模型请求。
 
 ## 隐私与适用范围
 

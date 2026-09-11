@@ -4,7 +4,7 @@
 
 [Quick install](#quick-install) · [中文说明](README.zh-CN.md) · [Star this project](https://github.com/julilaoshi/codex-token-meter)
 
-Public v1.0.2 · Local macOS utility · Python 3.9+ · No third-party Python dependencies · No model calls
+Public v1.0.3 · Local macOS utility · Python 3.9+ · No third-party Python dependencies · No model calls
 
 ![Token Meter preview — fictional demonstration data](docs/demo.png)
 
@@ -12,7 +12,7 @@ Public v1.0.2 · Local macOS utility · Python 3.9+ · No third-party Python dep
 
 ## What you get
 
-- Active tasks with a spinner, lifetime tokens and previous-turn usage.
+- Four metrics per task: lifetime tokens, current-period tokens, current-period token share and previous-turn usage. Active tasks include a spinner.
 - Your current Codex allowance period, discovered from local usage records.
 - Token share for each task within that period, with a compact pie chart.
 - Top five other completed tasks, ranked by tokens consumed in the same period.
@@ -25,7 +25,7 @@ This is an independent community tool, not an OpenAI product. The interface curr
 Requires macOS with Python 3.9+ and local Codex session records. No sudo, subscription credentials or API key is required. Review [install.sh](install.sh) before running it.
 
 ```sh
-python3 -c 'import urllib.request, subprocess; subprocess.run(["sh"], input=urllib.request.urlopen("https://raw.githubusercontent.com/julilaoshi/codex-token-meter/v1.0.2/install.sh", timeout=30).read(), check=True)'
+python3 -c 'import urllib.request, subprocess; subprocess.run(["sh"], input=urllib.request.urlopen("https://raw.githubusercontent.com/julilaoshi/codex-token-meter/v1.0.3/install.sh", timeout=30).read(), check=True)'
 ```
 
 The installer fetches a fixed release, verifies its SHA-256 checksum, installs into your user directory and starts the local service. Click the printed localhost URL, or ask Codex to open it in its right-side browser panel. The panel is a browser tab attached to a task, not a global extension of the Codex interface.
@@ -58,7 +58,7 @@ Re-run the installer for a published version to update. No automatic updates or 
 
 The cycle uses the latest `codex` seven-day limit record: reset time minus seven days to reset time. The interface displays dates in Beijing time. Missing or expired cycle data makes the percentage and ranking unavailable until Codex writes a fresh record. No artificial weekly budget is assumed.
 
-Input, cached input and output follow Codex's cumulative token records. Snapshots are converted to increments; repeated timestamp/cumulative-count events are attributed once. A turn spans a user request and the model calls made before that turn ends or is cancelled. “Previous turn” does not mean the last model request.
+Input, cached input and output follow Codex's cumulative token records. Lifetime usage remains cumulative when source counters reset. Snapshots are converted to increments; repeated timestamp/cumulative-count events are attributed once. A turn spans a user request and the model calls made before that turn ends or is cancelled. “Previous turn” does not mean the last model request.
 
 ## Privacy and limits
 

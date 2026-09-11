@@ -43,6 +43,13 @@ class MonitorTests(unittest.TestCase):
         cutoff=datetime.fromisoformat('2026-09-07T00:00:00+08:00').timestamp()
         self.assertEqual(sum(v for k,v in tail.week_events.items() if k[0]>=cutoff),400)
 
+    def test_counter_reset_preserves_lifetime(self):
+        tail=Tail('/tmp/not-read')
+        for total in (1000,1200,100,250):
+            tail.apply({'type':'event_msg','payload':{'type':'token_count','info':{'total_token_usage':{'total_tokens':total}}}})
+        self.assertEqual(tail.total,1450)
+        self.assertEqual(tail.raw_total,250)
+
     def test_completion_removal_and_privacy(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);(root/'sessions').mkdir();p=root/'sessions'/'test.jsonl'

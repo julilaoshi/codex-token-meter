@@ -20,6 +20,7 @@ class Tail:
         self.turn = None
         self.ended = 0
         self.total = None
+        self.raw_total = None
         self.stamp = 0
         self.turn_base = None
         self.previous_turn = None
@@ -60,12 +61,13 @@ class Tail:
             usage = (p.get('info') or {}).get('total_token_usage') or {}
             if isinstance(usage.get('total_tokens'), int):
                 new_total = usage['total_tokens']
-                delta = max(0, new_total - self.total) if self.total is not None and new_total >= self.total else new_total
+                delta = new_total - self.raw_total if self.raw_total is not None and new_total >= self.raw_total else new_total
                 if self.active:
                     self.current_turn_usage += delta
                     if self.turn_base is None and self.total is None:
                         self.turn_base = 0
-                self.total = new_total
+                self.total = (self.total or 0) + delta
+                self.raw_total = new_total
                 try:
                     stamp = datetime.fromisoformat(d['timestamp'].replace('Z', '+00:00')).timestamp()
                     key = (stamp, new_total)
@@ -194,7 +196,7 @@ class Handler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         status = 200
         if path == '/api/health':
-            data = json.dumps({'app':'codex-token-meter','version':'1.0.2'}).encode()
+            data = json.dumps({'app':'codex-token-meter','version':'1.0.3'}).encode()
             content_type = 'application/json; charset=utf-8'
         elif path == '/api/status':
             if self.headers.get('Sec-Fetch-Site') == 'cross-site':

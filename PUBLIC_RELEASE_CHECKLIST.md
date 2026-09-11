@@ -1,4 +1,4 @@
-# v1.0.2 release checks
+# v1.0.3 release checks
 
 - [x] New standalone source repository; no inherited private history.
 - [x] English and Chinese README and contribution guides.
