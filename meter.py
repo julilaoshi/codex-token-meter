@@ -3,7 +3,7 @@
 import argparse, json, os, secrets, shutil, subprocess, sys, time, urllib.request
 from pathlib import Path
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 FILES = ('meter.py', 'server.py', 'index.html', 'LICENSE', 'README.md', 'README.zh-CN.md')
 MARKER = 'codex-token-meter-owned-v1'
 

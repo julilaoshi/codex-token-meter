@@ -1,4 +1,4 @@
-# v1.0.1 — Codex Token Meter
+# v1.0.2 — Codex Token Meter
 
 A compact local dashboard for Codex usage on macOS.
 
@@ -13,3 +13,5 @@ Requires Python 3.9+. The interface currently uses Chinese labels. Counts reflec
 Install from the README, or download the ZIP and run `python3 meter.py install`. SHA256SUMS covers the attached distribution archive.
 
 Installation update: fetches fixed-tag source files with per-file SHA-256 verification, avoiding the separate Release asset download host. The ZIP remains available for manual installation.
+
+The recommended one-line entry uses Python HTTPS directly, matching the sole required runtime and avoiding curl-specific proxy behavior.

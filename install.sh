@@ -7,7 +7,7 @@ task_tmp=$(mktemp -d)
 trap 'rm -rf "$task_tmp"' EXIT HUP INT TERM
 python3 - "$task_tmp" <<'PY'
 import concurrent.futures,hashlib,json,pathlib,sys,urllib.request
-root=pathlib.Path(sys.argv[1]);base='https://raw.githubusercontent.com/julilaoshi/codex-token-meter/v1.0.1/'
+root=pathlib.Path(sys.argv[1]);base='https://raw.githubusercontent.com/julilaoshi/codex-token-meter/v1.0.2/'
 files=('meter.py','server.py','index.html','LICENSE','README.md','README.zh-CN.md')
 def fetch(name):
  for attempt in range(2):

@@ -194,7 +194,7 @@ class Handler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         status = 200
         if path == '/api/health':
-            data = json.dumps({'app':'codex-token-meter','version':'1.0.1'}).encode()
+            data = json.dumps({'app':'codex-token-meter','version':'1.0.2'}).encode()
             content_type = 'application/json; charset=utf-8'
         elif path == '/api/status':
             if self.headers.get('Sec-Fetch-Site') == 'cross-site':

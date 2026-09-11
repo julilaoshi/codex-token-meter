@@ -6,7 +6,7 @@ FILES=('checksums.json','meter.py','server.py','index.html','install.sh','LICENS
        'test_monitor.py','test_lifecycle.py','build_release.py','docs/demo.png','docs/launch-copy.md','docs/release-notes.md')
 if __name__=='__main__':
     root=Path(__file__).resolve().parent;out=root/'dist';out.mkdir(exist_ok=True)
-    archive=out/'codex-token-meter-1.0.1.zip'
+    archive=out/'codex-token-meter-1.0.2.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
         for name in FILES:
             p=root/name
