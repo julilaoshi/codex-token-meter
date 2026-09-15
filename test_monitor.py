@@ -92,3 +92,25 @@ class RankingTests(unittest.TestCase):
             self.assertAlmostEqual(d['cycle']['end'],now+100)
 
 if __name__=='__main__':unittest.main()
+
+class NameAndResetTests(unittest.TestCase):
+    def test_saved_name_refresh(self):
+        from server import saved_names,display_title
+        with tempfile.TemporaryDirectory() as tmp:
+            home=Path(tmp);p=home/'session_index.jsonl'
+            row={'id':'a','name':None,'title':'# Files mentioned by the user: ## My request:'}
+            p.write_text(json.dumps({'id':'a','thread_name':'自动命名'})+'\n')
+            self.assertEqual(display_title(row,saved_names(home,{'a'})),'自动命名')
+            with p.open('a') as f:f.write(json.dumps({'id':'a','thread_name':'修改后的名字'})+'\n')
+            self.assertEqual(display_title(row,saved_names(home,{'a'})),'修改后的名字')
+            row['name']='数据库最新命名'
+            self.assertEqual(display_title(row,saved_names(home,{'a'})),'数据库最新命名')
+    def test_early_reset_and_natural_reset(self):
+        from server import select_cycle
+        old={'start':0,'end':604800,'observed':100}
+        reset={'start':200000,'end':804800,'observed':200010}
+        self.assertEqual(select_cycle([old,reset],'current',200020),reset)
+        previous=select_cycle([old,reset],'previous',200020)
+        self.assertEqual((previous['start'],previous['end']),(0,200000))
+        natural={'start':604800,'end':1209600,'observed':604810}
+        self.assertEqual(select_cycle([old,natural],'previous',604820),old)

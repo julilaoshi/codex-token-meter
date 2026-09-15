@@ -69,7 +69,7 @@ Input, cached input and output follow Codex's cumulative token records. Lifetime
 - Honors `CODEX_HOME`. Optionally set `TOKEN_METER_EXCLUDE` to a colon-separated list of private directories before starting. Matching task directories and descendants are excluded.
 - Only locally available records are counted. Child-agent sessions are excluded. Archived tasks can appear in the ranking. Cloud-only work and other computers are not counted.
 - Running includes waiting for tools or approval. Sessions with no log changes for 30 minutes are hidden; long quiet work may also be hidden until its next log update. Stale active tasks are not reclassified as completed ranking entries.
-- Recent metadata discovery covers eight days. Missing records, forks and changed log schemas may limit attribution. These are observed local counts, not an official billing audit.
+- Recent metadata discovery covers twenty-two days. Missing records, forks and changed log schemas may limit attribution. These are observed local counts, not an official billing audit.
 - Local Codex storage is an implementation detail. Unsupported schemas produce an unavailable state rather than invented totals.
 
 ## Development and demo
@@ -91,3 +91,12 @@ If this helps, [star the repository](https://github.com/julilaoshi/codex-token-m
 ## License
 
 [MIT](LICENSE). See [brand notice](BRAND_NOTICE.md) for the independent-project identity and trademark boundary.
+
+## Latest changes on main
+
+- Switch between the current and previous recorded account periods.
+- Prefer saved Codex task names; filter attachment scaffolding and truncate long labels.
+- Refresh reset times from local records; an early reset truncates the preceding period to avoid overlap.
+- Previous-period totals stop at that period’s end. History depends on available local logs; this is not billing data.
+
+These changes are available on `main`; the tagged one-line installer above remains v1.0.3. To use main, download its source ZIP and run `python3 meter.py install` in the extracted folder. No login startup is added.
